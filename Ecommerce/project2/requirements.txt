@@ -1,6 +1,8 @@
-Django
+Django==4.2.11
 gunicorn
 whitenoise
 djangorestframework
 djangorestframework-simplejwt
 django-cors-headers
+razorpay
+
