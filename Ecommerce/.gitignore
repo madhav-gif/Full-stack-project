@@ -1,14 +1,9 @@
-# Backend
+virtual/
 __pycache__/
-*.pyc
-.env
 db.sqlite3
-venv/
-
-# Frontend
+staticfiles/
 node_modules/
-dist/
-.env
+
 
 # OS
 .DS_Store
