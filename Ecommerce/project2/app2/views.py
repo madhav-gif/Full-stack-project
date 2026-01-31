@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.conf import settings
+import razorpay
 
 from rest_framework import generics, viewsets, status
 from rest_framework.views import APIView
