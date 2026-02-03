@@ -1,9 +1,16 @@
+# Python / Django
 virtual/
 __pycache__/
+*.pyc
 db.sqlite3
+.env
+
+# Django static & media
 staticfiles/
+media/
+
+# Node / React
 node_modules/
 
-
-# OS
+# OS files
 .DS_Store
