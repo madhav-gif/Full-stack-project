@@ -1,16 +1,32 @@
+# --------------------
 # Python / Django
+# --------------------
 virtual/
 __pycache__/
 *.pyc
-db.sqlite3
 .env
+db.sqlite3
 
+# --------------------
 # Django static & media
+# --------------------
 staticfiles/
 media/
 
-# Node / React
-node_modules/
+# --------------------
+# Node / React (abhi ignore)
+# --------------------
+frontend/
+package.json
+package-lock.json
 
-# OS files
+# --------------------
+# Build / deploy extras
+# --------------------
+build.sh
+
+# --------------------
+# OS / Editor files
+# --------------------
 .DS_Store
+.vscode/
