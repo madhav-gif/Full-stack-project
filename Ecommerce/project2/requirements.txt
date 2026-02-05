@@ -4,3 +4,5 @@ whitenoise
 djangorestframework
 djangorestframework-simplejwt
 razorpay
+django-cors-headers
+
