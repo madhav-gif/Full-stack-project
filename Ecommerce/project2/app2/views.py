@@ -11,7 +11,6 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import api_view
 
 from rest_framework_simplejwt.tokens import RefreshToken
-
 import razorpay
 
 from .models import Product, Cart, Order, Wishlist
@@ -22,6 +21,13 @@ from .serializers import (
     WishlistSerializer,
     SignupSerializer,
 )
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Django backend is live 🚀👍🎊🎊🎊🎊👍")
+
+
+
 
 # ------------------ PRODUCT ------------------
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):

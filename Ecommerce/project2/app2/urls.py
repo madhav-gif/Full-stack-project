@@ -1,6 +1,7 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
+from app2.views import home
 
 from .views import (
     ProductViewSet,
@@ -20,15 +21,16 @@ router.register(r'orders', OrderViewSet, basename='order')
 router.register(r'wishlist', WishlistViewSet, basename='wishlist')
 
 urlpatterns = [
-    # Router URLs
-    path('', include(router.urls)),
 
-    # Auth URLs
-    path('signup/', SignupView.as_view(), name='signup'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    #  API routes
+    path("api/", include(router.urls)),
 
-    # Razorpay URLs
-    path('create-razorpay-order/', create_razorpay_order, name='create_razorpay_order'),
-    path('verify-payment/', verify_payment, name='verify_payment'),
+    #  Auth
+    path("signup/", SignupView.as_view(), name="signup"),
+    path("login/", LoginView.as_view(), name="login"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+
+    # Razorpay
+    path("create-razorpay-order/", create_razorpay_order),
+    path("verify-payment/", verify_payment),
 ]
