@@ -23,7 +23,7 @@ router.register(r'wishlist', WishlistViewSet, basename='wishlist')
 urlpatterns = [
 
     #  API routes
-    path("api/", include(router.urls)),
+    path("", include(router.urls)),
 
     #  Auth
     path("signup/", SignupView.as_view(), name="signup"),
