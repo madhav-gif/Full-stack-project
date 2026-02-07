@@ -1,8 +1,0 @@
-Django>=4.2
-gunicorn
-whitenoise
-djangorestframework
-djangorestframework-simplejwt
-razorpay
-django-cors-headers
-
