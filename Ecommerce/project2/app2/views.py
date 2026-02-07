@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.conf import settings
-import razorpay
+from django.http import HttpResponse
 
 from rest_framework import generics, viewsets, status
 from rest_framework.views import APIView
@@ -21,19 +21,35 @@ from .serializers import (
     WishlistSerializer,
     SignupSerializer,
 )
-from django.http import HttpResponse
 
+
+# ------------------ HOME ------------------
 def home(request):
-    return HttpResponse("Django backend is live 🚀👍🎊🎊🎊🎊👍")
+    return HttpResponse("Django backend is live 🚀👍🎊🎊🎊")
 
 
-
-
-# ------------------ PRODUCT ------------------
+# ------------------ PRODUCT LIST ------------------
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
+
+    # 🔥 IMPORTANT: image ke liye request context
+    def get_serializer_context(self):
+        return {"request": self.request}
+
+
+# ------------------ PRODUCT DETAIL ------------------
+class ProductDetailView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, pk):
+        product = get_object_or_404(Product, id=pk)
+        serializer = ProductSerializer(
+            product,
+            context={"request": request}
+        )
+        return Response(serializer.data)
 
 
 # ------------------ CART ------------------
@@ -74,10 +90,7 @@ class CartViewSet(viewsets.ModelViewSet):
         if quantity is None:
             return Response({"error": "Quantity not provided"}, status=400)
 
-        quantity = int(quantity)
-        if quantity < 1:
-            quantity = 1
-
+        quantity = max(int(quantity), 1)
         cart_item.quantity = quantity
         cart_item.save()
 
@@ -146,16 +159,6 @@ class WishlistViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(wishlist)
         return Response(serializer.data, status=201)
-
-
-# ------------------ PRODUCT DETAIL ------------------
-class ProductDetailView(APIView):
-    permission_classes = [AllowAny]
-
-    def get(self, request, pk):
-        product = get_object_or_404(Product, id=pk)
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
 
 
 # ------------------ AUTH ------------------
