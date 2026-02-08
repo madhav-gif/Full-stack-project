@@ -5,11 +5,16 @@ from .models import Product, ProductImage, Cart, Wishlist, Order, OrderItem
 
 # ProductImage Serializer
 class ProductImageSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url=True)
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = ProductImage
         fields = ["id", "image"]
+
+    def get_image(self, obj):
+        if obj.image:
+            return obj.image.url
+        return None
 
 # Product Serializer
 class ProductSerializer(serializers.ModelSerializer):
