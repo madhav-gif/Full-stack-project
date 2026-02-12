@@ -30,7 +30,11 @@ class ProductImage(models.Model):
         related_name="images",
         on_delete=models.CASCADE
     )
-    image = CloudinaryField('product_image')
+    image = CloudinaryField(
+        'product_image',
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return f"Image of {self.product.name}"
